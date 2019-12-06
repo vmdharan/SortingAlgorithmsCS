@@ -59,8 +59,11 @@ namespace SortingAlgorithmsCS
 
         private static void PerformSort()
         {
-            var s1 = new BubbleSort<Car>();
+            //var s1 = new BubbleSort<Car>();
+            var s1 = new SelectionSort<Car>();
             s1.Sort(ref vehicles);
+
+            
         }
 
         private static void ShowData()
