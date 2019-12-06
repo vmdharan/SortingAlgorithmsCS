@@ -43,11 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Car.cs" />
+    <Compile Include="Classes\SortableItem.cs" />
+    <Compile Include="Classes\Vehicle.cs" />
+    <Compile Include="Interfaces\ISortable.cs" />
+    <Compile Include="Interfaces\IVehicle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
