@@ -36,8 +36,8 @@ namespace SortingAlgorithmsCS
 
             // Run sorting algorithm.
             sw.Start();
-            //PerformSort();
-            PerformSortMultiThreaded();
+            PerformSort();
+            //PerformSortMultiThreaded();
             sw.Stop();
             Console.WriteLine("\n -- Total Sorting time: " + sw.Elapsed.TotalMilliseconds + " --");
 
@@ -61,8 +61,8 @@ namespace SortingAlgorithmsCS
 
         private static void PerformSort()
         {
-            RunSortAlgorithm(vehicles, SortingAlgorithm.BubbleSort);
-            RunSortAlgorithm(vehicles, SortingAlgorithm.SelectionSort);
+            //RunSortAlgorithm(vehicles, SortingAlgorithm.BubbleSort);
+            //RunSortAlgorithm(vehicles, SortingAlgorithm.SelectionSort);
             RunSortAlgorithm(vehicles, SortingAlgorithm.InsertionSort);
         }
 
