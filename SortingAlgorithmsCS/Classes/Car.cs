@@ -7,6 +7,11 @@
         {
         }
 
+        public Car() : base()
+        {
+
+        }
+
         public override void run()
         {
             currentState = 2;

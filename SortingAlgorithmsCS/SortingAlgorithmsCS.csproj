@@ -51,6 +51,7 @@
     <Compile Include="Classes\Vehicle.cs" />
     <Compile Include="Interfaces\ISortable.cs" />
     <Compile Include="Interfaces\IVehicle.cs" />
+    <Compile Include="Patterns\VehicleFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

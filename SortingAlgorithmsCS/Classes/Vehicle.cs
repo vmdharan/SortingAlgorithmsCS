@@ -16,6 +16,11 @@ namespace SortingAlgorithmsCS.Classes
             registration = _registration;
         }
 
+        public Vehicle()
+        {
+
+        }
+
         public abstract void run();
 
         public abstract void start();
