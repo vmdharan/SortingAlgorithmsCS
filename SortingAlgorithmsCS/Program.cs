@@ -18,6 +18,13 @@ namespace SortingAlgorithmsCS
 
         private static SortableItem<Car>[] vehicles;
 
+        private enum SortingAlgorithm
+        {
+            BubbleSort = 1,
+            SelectionSort = 2,
+            InsertionSort = 3
+        };
+
 
         static void Main(string[] args)
         {
@@ -54,9 +61,9 @@ namespace SortingAlgorithmsCS
 
         private static void PerformSort()
         {
-            RunSelectionSort(vehicles);
-            RunBubbleSort(vehicles);
-            RunInsertionSort(vehicles);
+            RunSortAlgorithm(vehicles, SortingAlgorithm.BubbleSort);
+            RunSortAlgorithm(vehicles, SortingAlgorithm.SelectionSort);
+            RunSortAlgorithm(vehicles, SortingAlgorithm.InsertionSort);
         }
 
         private static void PerformSortMultiThreaded()
@@ -75,43 +82,58 @@ namespace SortingAlgorithmsCS
             t3.Join();
         }
 
-        private static void RunBubbleSort(Object o)
+        private static void RunSortAlgorithm(Object o, SortingAlgorithm alg)
         {
             var vehicles = (SortableItem<Car>[])o;
             Stopwatch sw = new Stopwatch();
-            var s1 = new BubbleSort<Car>();
 
-            sw.Start();
-            s1.Sort(ref vehicles);
-            sw.Stop();
+            string algorithm = "Unknown";
+            SortingAlgorithm<SortableItem<Car>, Car> s1 = null;
 
-            ShowElapsedTime(sw.Elapsed.TotalMilliseconds, "BubbleSort");
+            switch(alg)
+            {
+                case SortingAlgorithm.BubbleSort:
+                    algorithm = "BubbleSort";
+                    s1 = new BubbleSort<Car>();
+                    break;
+
+                case SortingAlgorithm.SelectionSort:
+                    algorithm = "SelectionSort";
+                    s1 = new SelectionSort<Car>();
+                    break;
+
+                case SortingAlgorithm.InsertionSort:
+                    algorithm = "InsertionSort";
+                    s1 = new InsertionSort<Car>();
+                    break;
+
+                default:
+                    break;
+            }
+
+            if(s1 != null)
+            {
+                sw.Start();
+                s1.Sort(ref vehicles);
+                sw.Stop();
+            }
+
+            ShowElapsedTime(sw.Elapsed.TotalMilliseconds, algorithm);
+        }
+
+        private static void RunBubbleSort(Object o)
+        {
+            RunSortAlgorithm(o, SortingAlgorithm.BubbleSort);
         }
 
         private static void RunSelectionSort(Object o)
         {
-            var vehicles = (SortableItem<Car>[])o;
-            Stopwatch sw = new Stopwatch();
-            var s1 = new SelectionSort<Car>();
-
-            sw.Start();
-            s1.Sort(ref vehicles);
-            sw.Stop();
-
-            ShowElapsedTime(sw.Elapsed.TotalMilliseconds, "SelectionSort");
+            RunSortAlgorithm(o, SortingAlgorithm.SelectionSort);
         }
 
         private static void RunInsertionSort(Object o)
         {
-            var vehicles = (SortableItem<Car>[])o;
-            Stopwatch sw = new Stopwatch();
-            var s1 = new InsertionSort<Car>();
-
-            sw.Start();
-            s1.Sort(ref vehicles);
-            sw.Stop();
-
-            ShowElapsedTime(sw.Elapsed.TotalMilliseconds, "InsertionSort");
+            RunSortAlgorithm(o, SortingAlgorithm.InsertionSort);
         }
 
         private static void ShowElapsedTime(double t, string sortType)
