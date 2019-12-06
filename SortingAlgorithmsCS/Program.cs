@@ -56,6 +56,7 @@ namespace SortingAlgorithmsCS
         {
             RunSelectionSort(vehicles);
             RunBubbleSort(vehicles);
+            RunInsertionSort(vehicles);
         }
 
         private static void PerformSortMultiThreaded()
@@ -66,8 +67,12 @@ namespace SortingAlgorithmsCS
             Thread t2 = new Thread(new ParameterizedThreadStart(RunSelectionSort));
             t2.Start(vehicles);
 
+            Thread t3 = new Thread(new ParameterizedThreadStart(RunInsertionSort));
+            t3.Start(vehicles);
+
             t1.Join();
             t2.Join();
+            t3.Join();
         }
 
         private static void RunBubbleSort(Object o)
@@ -94,6 +99,19 @@ namespace SortingAlgorithmsCS
             sw.Stop();
 
             ShowElapsedTime(sw.Elapsed.TotalMilliseconds, "SelectionSort");
+        }
+
+        private static void RunInsertionSort(Object o)
+        {
+            var vehicles = (SortableItem<Car>[])o;
+            Stopwatch sw = new Stopwatch();
+            var s1 = new InsertionSort<Car>();
+
+            sw.Start();
+            s1.Sort(ref vehicles);
+            sw.Stop();
+
+            ShowElapsedTime(sw.Elapsed.TotalMilliseconds, "InsertionSort");
         }
 
         private static void ShowElapsedTime(double t, string sortType)
