@@ -2,6 +2,7 @@
 using SortingAlgorithmsCS.Classes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,12 +16,18 @@ namespace SortingAlgorithmsCS
 
         static void Main(string[] args)
         {
+            Stopwatch sw = new Stopwatch();
+
             Console.WriteLine("-- Before sorting --");
             Initialise();
             ShowData();
 
             // Run sorting algorithm.
+            sw.Start();
             PerformSort();
+            sw.Stop();
+            Console.WriteLine("\n-- Elapsed time(ms) for sort --");
+            Console.WriteLine(sw.Elapsed.TotalMilliseconds);
 
             Console.WriteLine("\n-- After sorting -- ");
             ShowData();
