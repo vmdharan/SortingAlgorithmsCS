@@ -2,7 +2,7 @@
 
 namespace SortingAlgorithmsCS.Classes
 {
-    class SortableItem<T> : ISortable 
+    public class SortableItem<T> : ISortable 
     {
         public int Id { get; set; }
 

@@ -43,8 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithms\BubbleSort.cs" />
     <Compile Include="Classes\Car.cs" />
     <Compile Include="Classes\SortableItem.cs" />
+    <Compile Include="Classes\SortingAlgorithm.cs" />
     <Compile Include="Classes\Vehicle.cs" />
     <Compile Include="Interfaces\ISortable.cs" />
     <Compile Include="Interfaces\IVehicle.cs" />

@@ -1,4 +1,5 @@
-﻿using SortingAlgorithmsCS.Classes;
+﻿using SortingAlgorithmsCS.Algorithms;
+using SortingAlgorithmsCS.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,11 @@ namespace SortingAlgorithmsCS
             Initialise();
             ShowData();
 
+            // Run sorting algorithm.
+            PerformSort();
+
             Console.WriteLine("\n-- After sorting -- ");
+            ShowData();
 
             Console.ReadKey();
         }
@@ -43,6 +48,12 @@ namespace SortingAlgorithmsCS
             vehicles[7].Val = new Car("Mitsubishi", "Lancer", "REG0" + Convert.ToString(7).PadLeft(2, '0'));
             vehicles[8].Val = new Car("Mazda", "3", "REG0" + Convert.ToString(8).PadLeft(2, '0'));
             vehicles[9].Val = new Car("Ford", "Mustang", "REG0" + Convert.ToString(9).PadLeft(2, '0'));
+        }
+
+        private static void PerformSort()
+        {
+            var s1 = new BubbleSort<Car>();
+            s1.Sort(ref vehicles);
         }
 
         private static void ShowData()
