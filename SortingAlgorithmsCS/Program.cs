@@ -14,7 +14,7 @@ namespace SortingAlgorithmsCS
     class Program
     {
         private const int MAXINDEX = 99999;  // Maximum value to use as index (for RNG)
-        private const int MAXITEMS = 20000;  // Maximum number of elements in array
+        private const int MAXITEMS = 25;  // Maximum number of elements in array
 
         private static SortableItem<Car>[] vehicles;
 
@@ -22,7 +22,8 @@ namespace SortingAlgorithmsCS
         {
             BubbleSort = 1,
             SelectionSort = 2,
-            InsertionSort = 3
+            InsertionSort = 3,
+            MergeSort = 4
         };
 
 
@@ -32,17 +33,17 @@ namespace SortingAlgorithmsCS
 
             Console.WriteLine("-- Before sorting --");
             Initialise();
-            //ShowData();
+            ShowData();
 
             // Run sorting algorithm.
             sw.Start();
-            //PerformSort();
-            PerformSortMultiThreaded();
+            PerformSort();
+            //PerformSortMultiThreaded();
             sw.Stop();
             Console.WriteLine("\n -- Total Sorting time: " + sw.Elapsed.TotalMilliseconds + " --");
 
             Console.WriteLine("\n-- After sorting --");
-            //ShowData();
+            ShowData();
 
             Console.ReadKey();
         }
@@ -61,9 +62,10 @@ namespace SortingAlgorithmsCS
 
         private static void PerformSort()
         {
-            RunSortAlgorithm(vehicles.Clone(), SortingAlgorithm.BubbleSort);
-            RunSortAlgorithm(vehicles.Clone(), SortingAlgorithm.SelectionSort);
-            RunSortAlgorithm(vehicles.Clone(), SortingAlgorithm.InsertionSort);
+            //RunSortAlgorithm(vehicles.Clone(), SortingAlgorithm.BubbleSort);
+            //RunSortAlgorithm(vehicles.Clone(), SortingAlgorithm.SelectionSort);
+            //RunSortAlgorithm(vehicles.Clone(), SortingAlgorithm.InsertionSort);
+            RunSortAlgorithm(vehicles, SortingAlgorithm.MergeSort);
         }
 
         private static void PerformSortMultiThreaded()
@@ -77,9 +79,13 @@ namespace SortingAlgorithmsCS
             Thread t3 = new Thread(new ParameterizedThreadStart(RunInsertionSort));
             t3.Start(vehicles.Clone());
 
+            Thread t4 = new Thread(new ParameterizedThreadStart(RunMergeSort));
+            t4.Start(vehicles.Clone());
+
             t1.Join();
             t2.Join();
             t3.Join();
+            t4.Join();
         }
 
         private static void RunSortAlgorithm(Object o, SortingAlgorithm alg)
@@ -105,6 +111,11 @@ namespace SortingAlgorithmsCS
                 case SortingAlgorithm.InsertionSort:
                     algorithm = "InsertionSort";
                     s1 = new InsertionSort<Car>();
+                    break;
+
+                case SortingAlgorithm.MergeSort:
+                    algorithm = "MergeSort";
+                    s1 = new MergeSort<Car>();
                     break;
 
                 default:
@@ -134,6 +145,11 @@ namespace SortingAlgorithmsCS
         private static void RunInsertionSort(Object o)
         {
             RunSortAlgorithm(o, SortingAlgorithm.InsertionSort);
+        }
+
+        private static void RunMergeSort(Object o)
+        {
+            RunSortAlgorithm(o, SortingAlgorithm.MergeSort);
         }
 
         private static void ShowElapsedTime(double t, string sortType)
