@@ -1,8 +1,9 @@
 ﻿using SortingAlgorithmsCS.Interfaces;
+using System;
 
 namespace SortingAlgorithmsCS.Classes
 {
-    public abstract class Vehicle : IVehicle
+    public abstract class Vehicle : IVehicle, ICloneable
     {
         public string make { get; set; }
         public string model { get; set; }
@@ -27,5 +28,9 @@ namespace SortingAlgorithmsCS.Classes
 
         public abstract void stop();
 
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }
